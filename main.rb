@@ -17,7 +17,7 @@ url = "#{TOP_URL}/svcSH/macHF/salon/"
 # XPathの定義
 xpath = {
 	:next_link => "//*[@id=\"mainContents\"]/div[4]/div[1]/div/p[2]/a",
-	:title     => "//*[@id=\"mainContents\"]/ul/li[1]/div[1]/div/div[1]/h3/a" 
+	:title     => "//*[@id=\"mainContents\"]/ul/li" 
 }
 
 begin
@@ -43,7 +43,11 @@ begin
 	end
 
 	#各ページの最初のタイトルを表示させる
-	puts doc.xpath(xpath[:title]).text()
+	title = doc.xpath(xpath[:title])
+	title.xpath("div/div/div[1]/h3/a").each do |h3_link|
+		puts h3_link.text()
+		puts h3_link.attribute("href")
+	end
 
 	# サーバーに負荷をかけないために、1秒毎にアクセスする
 	sleep(1)
