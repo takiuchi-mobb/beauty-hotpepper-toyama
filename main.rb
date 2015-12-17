@@ -1,4 +1,8 @@
 # coding:utf-8
 require_relative './web_scraping.rb'
+require_relative './beauty_parser.rb'
 
-WebScraping.new().parse()
+
+parser = BeautyParser.new
+
+WebScraping.new(parser).load()
